@@ -14,10 +14,9 @@ public class Servlet extends HttpServlet {
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
-        PrintWriter writer = response.getWriter();
         LengthMeasurement lengthMeasurement = new LengthMeasurement();
+
         lengthMeasurement.getNumbers(request, response);
-        lengthMeasurement.number(request, response);
 
     }
 

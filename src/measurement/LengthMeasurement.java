@@ -7,55 +7,44 @@ import java.io.PrintWriter;
 
 public class LengthMeasurement {
 
-    private Double millimeters;
-    private Double centimeters;
-    private Double meters;
-
 
     public void getNumbers(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        if (request.getParameter("millimeters") != null) {
-
-            millimeters = Double.valueOf(request.getParameter("millimeters"));
-        }
-
-        if (request.getParameter("centimeters") != null) {
-
-            centimeters = Double.valueOf(request.getParameter("centimeters"));
-        }
-
-        if (request.getParameter("meters") != null) {
-
-            meters = Double.valueOf(request.getParameter("meters"));
-        }
-
-
-    }
-
-    public void number(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
 
-        if (millimeters != null && centimeters == null && meters == null) {
-            writer.println("metry: " + millimeters / 1000);
-            writer.println("centrymetry: " + millimeters / 100);
-            writer.println("milimetry: " + millimeters);
+        String number1 = request.getParameter("millimeters");
+        String number2 = request.getParameter("centimeters");
+        String number3 = request.getParameter("meters");
 
-        }
-        if (centimeters != null && meters == null && millimeters == null) {
-            writer.println("Centrymentry nie są null. metry: " + centimeters / 100);
-            writer.println("centrymetry: " + centimeters);
-            writer.println("milimetry: " + centimeters * 10);
-        }
-        if (meters != null && centimeters == null && millimeters == null) {
-            writer.println("Metry nie są null: metry: " + meters / 100);
-            writer.println("centrymetry: " + meters);
-            writer.println("milimetry: " + meters * 10);
-        }
+
+
+        if (!number1.equalsIgnoreCase("")){
+            double millimeters = Double.valueOf(number1);
+            writer.println("metry: " + millimeters/1000);
+            writer.println("cetrymetry: " + millimeters/10);
+            writer.println("milimetry: " + millimeters);
+        }else writer.println("Należy wprowadzić tylko jedną wartość.");
+
+        if (!number2.equalsIgnoreCase("")){
+            double centimeters = Double.valueOf(number2);
+            writer.println("metry: " + centimeters * 100);
+            writer.println("cetrymetry: " + centimeters);
+            writer.println("milimetry: " + centimeters/10);
+        }else writer.println("Należy wprowadzić tylko jedną wartość.");
+
+        if (!number3.equalsIgnoreCase("")) {
+
+            double meters = Double.valueOf(number3);
+            writer.println("metry: " + meters);
+            writer.println("cetrymetry: " + meters/100);
+            writer.println("milimetry: " + meters/1000);
+        }else writer.println("Należy wprowadzić tylko jedną wartość.");
+
+
+
 
 
     }
+
+
 
 }
